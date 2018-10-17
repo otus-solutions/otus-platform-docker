@@ -1,0 +1,13 @@
+.idea/
+**/mongoData/
+**/otus-db-build.js
+**/wildfly/domain/
+**/wildfly/data/
+**/wildfly/conf/standalone_xml_history
+**/wildfly/conf/*.properties
+**/wildfly/conf/standalone-full-ha.xml
+**/wildfly/conf/standalone-full.xml
+**/wildfly/conf/standalone-ha.xml
+**/wildfly/conf/standalone-load-balancer.xml
+**/.initialized
+*.swp

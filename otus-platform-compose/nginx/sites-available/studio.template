@@ -1,0 +1,39 @@
+server {
+  listen 443 ssl;
+  server_name localhost;
+  ssl_certificate /etc/nginx/ssl/studio.crt;
+  ssl_certificate_key /etc/nginx/ssl/studio.key;
+
+  location = / {
+    return 301 https://$host/otus-studio/;
+  }
+
+  location /otus-studio
+  {
+    root /usr/share/nginx/html;
+    index /otus-studio/index.html;
+
+    # kill cache
+    add_header Last-Modified $date_gmt;
+    add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+    if_modified_since off;
+    expires off;
+    etag off;
+  }
+}
+server
+{
+  listen 80;
+  server_name localhost;
+
+  large_client_header_buffers 10 16k;
+
+  location = / {
+    return 301 https://$host/otus-studio/;
+  }
+
+  location /otus-studio
+  {
+    return 301 https://$host/otus-studio/;
+  }
+}

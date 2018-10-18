@@ -1,23 +1,19 @@
 db = db.getSiblingDB('admin');
 
-passAdmin = "PASS_ADMIN";
-passOtus = "PASS_OTUS";
-passDomain = "PASS_DOMAIN";
-
 db.createUser({
   user: "admin",
-  pwd: passAdmin,
+  pwd: "PASS_ADMIN",
   roles: [{
     role: "root",
     db: "admin"
   }]
 });
-db.auth("admin", passAdmin);
+db.auth("admin", "PASS_ADMIN");
 
 db = db.getSiblingDB('otus');
 db.createUser({
   user: "otus",
-  pwd: passOtus,
+  pwd: "PASS_OTUS",
   roles: [{
     role: "dbOwner",
     db: "otus"
@@ -27,7 +23,7 @@ db.createUser({
 db = db.getSiblingDB('otus-domain');
 db.createUser({
   user: "otus",
-  pwd: passDomain,
+  pwd: "PASS_DOMAIN",
   roles: [{
     role: "dbOwner",
     db: "otus-domain"

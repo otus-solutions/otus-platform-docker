@@ -22,11 +22,6 @@ services:
       - '--auth'
       - '-f'
       - '/etc/mongo.conf'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: XRYs9yjU
-      PASS_OTUS: a9J1sVtL
-      PASS_DOMAIN: fLACLaFL
   otus_frontend:
     container_name: otus_frontend
     image: nginx:1.15.5

@@ -58,7 +58,7 @@ services:
     volumes:
       - ./wildfly/persistence:/bitnami
       - ./wildfly/config:/config
-      - ./wildfly/app-entrypoint.sh:/app-entrypoint.sh
+      # - ./wildfly/app-entrypoint.sh:/app-entrypoint.sh
     depends_on:
       - otus_db
     privileged: true

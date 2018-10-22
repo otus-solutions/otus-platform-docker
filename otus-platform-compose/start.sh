@@ -88,6 +88,10 @@ printf "${GREEN}"
 printf "Atualizando usuário Wildfly...\n"
 sed -i -E "s/WILDFLY_USER=.+/WILDFLY_USER=$user_wildfly/g" .env
 sed -i -E "s/WILDFLY_PASS=.+/WILDFLY_PASS=$pass_wildfly/g" .env
+
+sudo rm -rf ./wildfly/persistence/wildfly
+
+
 sleep 1
 printf "\n[COMPLETO]\n\n"
 printf "${NC}"
@@ -117,5 +121,12 @@ printf "${NC}"
 printf "***${BLUE}FIM DA CONFIGURAÇÃO${NC}***\n\n"
 
 
+sudo chmod -R 777 ./wildfly/persistence
+mkdir -p ./wildfly/persistence/wildfly/conf
+mkdir -p ./wildfly/persistence/wildfly/bin
+cp ./wildfly/config/standalone.xml ./wildfly/persistence/wildfly/conf/standalone.xml
+cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
+# docker restart otus_backend
 sudo docker-compose up -d
 sudo docker ps
+

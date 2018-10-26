@@ -22,6 +22,29 @@ services:
       - '--auth'
       - '-f'
       - '/etc/mongo.conf'
+  otus_backend:
+    container_name: otus_backend
+    image: bitnami/wildfly:14.0.1
+    restart: always
+    environment:
+      - WILDFLY_USERNAME=${WILDFLY_USER-admin}
+      - WILDFLY_PASSWORD=${WILDFLY_PASS-rBQqsMXU}
+    volumes:
+      - ./wildfly/persistence:/bitnami
+      - ./wildfly/config:/config
+      # - ./wildfly/app-entrypoint.sh:/app-entrypoint.sh
+    depends_on:
+      - otus_db
+    privileged: true
+    networks:
+      - otus-api-network
+      - otus-db-network
+    ports:
+      - 9990:9990
+      - 8080:8080
+      - 8787:8787
+    links:
+      - otus_db
   otus_frontend:
     container_name: otus_frontend
     image: nginx:1.15.5
@@ -48,26 +71,3 @@ services:
       - 443:443
     links:
       - otus_backend
-  otus_backend:
-    container_name: otus_backend
-    image: bitnami/wildfly:14.0.1
-    restart: always
-    environment:
-      - WILDFLY_USERNAME=${WILDFLY_USER-admin}
-      - WILDFLY_PASSWORD=${WILDFLY_PASS-rBQqsMXU}
-    volumes:
-      - ./wildfly/persistence:/bitnami
-      - ./wildfly/config:/config
-      # - ./wildfly/app-entrypoint.sh:/app-entrypoint.sh
-    depends_on:
-      - otus_db
-    privileged: true
-    networks:
-      - otus-api-network
-      - otus-db-network
-    ports:
-      - 9990:9990
-      - 8080:8080
-      - 8787:8787
-    links:
-      - otus_db

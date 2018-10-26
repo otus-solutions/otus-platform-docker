@@ -5,7 +5,7 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-printf "\n\n * * * MONGODB * * * \n"
+printf "\n * * * MONGODB * * * \n"
 printf "PASSWORD Mongo Admin(default = ${YELLOW}XRYs9yjU${NC}): "
 read passAdmin
 if [ -z $passAdmin ]; then
@@ -34,6 +34,22 @@ read pass_wildfly
 if [ -z $pass_wildfly ]; then
     pass_wildfly='rBQqsMXU'
 fi
+
+
+printf "Enable Debug Mode(y/n): "
+read debug
+case $debug in
+    y)
+        printf "DEBUG MODE ENABLED\n"
+        ;;
+    *)
+        printf "DEBUG MODE DISABLED\n"
+        ;;
+esac
+
+
+
+
 
 printf "\n\n * * * NGINX * * * \n"
 printf "OTUS HOST(default = ${YELLOW}otus.localhost${NC}): "
@@ -123,9 +139,14 @@ printf "***${BLUE}FIM DA CONFIGURAÇÃO${NC}***\n\n"
 
 sudo chmod -R 777 ./wildfly/persistence
 mkdir -p ./wildfly/persistence/wildfly/conf
-mkdir -p ./wildfly/persistence/wildfly/bin
+case $debug in
+    y)
+        mkdir -p ./wildfly/persistence/wildfly/bin
+        cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
+        ;;
+esac
+
 cp ./wildfly/config/standalone.xml ./wildfly/persistence/wildfly/conf/standalone.xml
-cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
 # docker restart otus_backend
 sudo docker-compose up -d
 sudo docker ps

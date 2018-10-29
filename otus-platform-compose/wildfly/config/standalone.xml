@@ -487,8 +487,8 @@
         <subsystem xmlns="urn:jboss:domain:undertow:7.0" default-server="default-server" default-virtual-host="default-host" default-servlet-container="default" default-security-domain="other">
             <buffer-cache name="default"/>
             <server name="default-server">
-                <http-listener name="default" socket-binding="http" url-charset="UTF-8" redirect-socket="https" enable-http2="true"/>
-                <https-listener name="https" socket-binding="https" url-charset="UTF-8" security-realm="ApplicationRealm" enable-http2="true"/>
+                <http-listener name="default" socket-binding="http" url-charset="UTF-8" redirect-socket="https" enable-http2="true" max-post-size="100000000"/>
+                <https-listener name="https" socket-binding="https" url-charset="UTF-8" security-realm="ApplicationRealm" enable-http2="true" max-post-size="100000000"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
                     <filter-ref name="server-header"/>

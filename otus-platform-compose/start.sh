@@ -1,5 +1,6 @@
 #!/bin/bash
 DARKGRAY='\033[1;30m'
+RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
@@ -36,20 +37,16 @@ if [ -z $pass_wildfly ]; then
 fi
 
 
-printf "Enable Debug Mode(y/n): "
+printf "Disable Debug Mode(y/n): "
 read debug
 case $debug in
     y)
-        printf "DEBUG MODE ENABLED\n"
+        printf "${RED}DEBUG MODE DISABLED${NC}\n"
         ;;
     *)
-        printf "DEBUG MODE DISABLED\n"
+        printf "DEBUG MODE ENABLED\n"
         ;;
 esac
-
-
-
-
 
 printf "\n\n * * * NGINX * * * \n"
 printf "OTUS HOST(default = ${YELLOW}otus.localhost${NC}): "
@@ -137,7 +134,6 @@ printf "${NC}"
 printf "***${BLUE}FIM DA CONFIGURAÇÃO${NC}***\n\n"
 
 
-sudo chmod -R 777 ./wildfly/persistence
 mkdir -p ./wildfly/persistence/wildfly/conf
 case $debug in
     y)
@@ -149,5 +145,6 @@ esac
 cp ./wildfly/config/standalone.xml ./wildfly/persistence/wildfly/conf/standalone.xml
 # docker restart otus_backend
 sudo docker-compose up -d
+sudo chmod -R 777 ./wildfly/persistence
 sudo docker ps
 

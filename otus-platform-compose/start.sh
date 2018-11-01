@@ -133,14 +133,14 @@ printf "${NC}"
 
 printf "***${BLUE}FIM DA CONFIGURAÇÃO${NC}***\n\n"
 
-
+mkdir -p ./wildfly/persistence/wildfly/bin
+cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
 case $debug in
     y)
-        mkdir -p ./wildfly/persistence/wildfly/bin
+        printf "${RED}DEBUG MODE DISABLED${NC}"
         ;;
     *)
-        mkdir -p ./wildfly/persistence/wildfly/bin
-        cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
+        sed -i "s/#debug/JAVA_OPTS/g" ./wildfly/persistence/wildfly/bin/standalone.conf
         ;;
 esac
 

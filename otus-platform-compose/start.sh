@@ -134,16 +134,18 @@ printf "${NC}"
 printf "***${BLUE}FIM DA CONFIGURAÇÃO${NC}***\n\n"
 
 
-mkdir -p ./wildfly/persistence/wildfly/conf
 case $debug in
     y)
+        mkdir -p ./wildfly/persistence/wildfly/bin
+        ;;
+    *)
         mkdir -p ./wildfly/persistence/wildfly/bin
         cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
         ;;
 esac
 
+mkdir -p ./wildfly/persistence/wildfly/conf
 cp ./wildfly/config/standalone.xml ./wildfly/persistence/wildfly/conf/standalone.xml
-# docker restart otus_backend
 sudo docker-compose up -d
 sudo chmod -R 777 ./wildfly/persistence
 sudo docker ps

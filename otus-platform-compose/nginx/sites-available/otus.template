@@ -21,7 +21,7 @@ server{
     etag off;
   }
 
-   location /normalizer
+   location /otus-exam-normalizer
   {
     root /usr/share/nginx/html;
     index /otus-exam-normalizer/app/index.html;
@@ -52,7 +52,7 @@ server
     return 301 https://$host/otus/;
   }
 
-  location /normalizer {
-    return 301 https://$host/normalizer/;
+  location /otus-exam-normalizer {
+    return 301 https://$host/otus-exam-normalizer/;
   }
 }

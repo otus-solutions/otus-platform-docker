@@ -1,6 +1,6 @@
 server{
   listen 443 ssl;
-  server_name localhost;
+  server_name otus.localhost;
   ssl_certificate /etc/nginx/ssl/otus.crt;
   ssl_certificate_key /etc/nginx/ssl/otus.key;
 
@@ -20,13 +20,26 @@ server{
     expires off;
     etag off;
   }
+
+   location /normalizer
+  {
+    root /usr/share/nginx/html;
+    index /otus-exam-normalizer/app/index.html;
+
+    # kill cache
+    add_header Last-Modified $date_gmt;
+    add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+    if_modified_since off;
+    expires off;
+    etag off;
+  }
 }
 
 server
 {
   listen 80;
   listen [::]:80;
-  server_name localhost;
+  server_name otus.localhost;
 
   large_client_header_buffers 10 16k;
 
@@ -37,5 +50,9 @@ server
   location /otus
   {
     return 301 https://$host/otus/;
+  }
+
+  location /normalizer {
+    return 301 https://$host/normalizer/;
   }
 }

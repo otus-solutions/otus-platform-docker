@@ -85,6 +85,8 @@ if [ -z $domain_api ]; then
     domain_api='api-domain.localhost'
 fi
 
+sudo docker-compose down
+
 printf "\n${DARKGRAY}#############${NC} MONGODB${DARKGRAY} #############${NC}\n"
 printf "${GREEN}"
 printf "Atualizando passwords mongodb..."

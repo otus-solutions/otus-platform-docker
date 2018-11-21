@@ -149,6 +149,7 @@ esac
 mkdir -p ./wildfly/persistence/wildfly/conf
 cp ./wildfly/config/standalone.xml ./wildfly/persistence/wildfly/conf/standalone.xml
 sudo docker-compose up -d
-sudo chmod -R 777 ./wildfly/persistence
+sudo chmod -R 775 ./wildfly/persistence
+sudo chmod -R 775 ./nginx/html
+sudo chmod -R 775 ./nginx/sites-enabled
 sudo docker ps
-

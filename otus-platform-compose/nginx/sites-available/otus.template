@@ -1,6 +1,6 @@
 server{
   listen 443 ssl;
-  server_name otus.localhost;
+  server_name localhost;
   ssl_certificate /etc/nginx/ssl/otus.crt;
   ssl_certificate_key /etc/nginx/ssl/otus.key;
 

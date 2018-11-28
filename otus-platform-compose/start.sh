@@ -85,7 +85,10 @@ if [ -z $domain_api ]; then
     domain_api='api-domain.localhost'
 fi
 
-sudo docker-compose down
+printf "\nAs informações acima estão corretas? Deseja prosseguir(ENTER): "
+read ANSWER
+
+
 
 printf "\n${DARKGRAY}#############${NC} MONGODB${DARKGRAY} #############${NC}\n"
 printf "${GREEN}"
@@ -139,7 +142,7 @@ mkdir -p ./wildfly/persistence/wildfly/bin
 cp ./wildfly/config/standalone.conf ./wildfly/persistence/wildfly/bin/standalone.conf
 case $debug in
     y)
-        printf "${RED}DEBUG MODE DISABLED${NC}"
+        printf "${RED}DEBUG MODE DISABLED${NC}\n"
         ;;
     *)
         sed -i "s/#debug/JAVA_OPTS/g" ./wildfly/persistence/wildfly/bin/standalone.conf

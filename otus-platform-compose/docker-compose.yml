@@ -11,9 +11,9 @@ services:
     env_file:
       - .env
     volumes:
-      - ${MONGO_DATA-./mongodb/mongoData/}:/data/db/
-      - ${MONGO_CONF_PATH-./mongodb/mongod.conf}:/etc/mongo.conf
-      - ./mongodb/otus-db-build.js:/docker-entrypoint-initdb.d/initdb.js
+      - ${MONGO_DATA-./mongodb/persistence/mongoData/}:/data/db/
+      - ${MONGO_CONF_PATH-./mongodb/persistence/mongod.conf}:/etc/mongo.conf
+      - ./mongodb/persistence/otus-db-build.js:/docker-entrypoint-initdb.d/initdb.js
     networks:
       - otus-db-network
     ports:
@@ -32,7 +32,6 @@ services:
     volumes:
       - ./wildfly/persistence:/bitnami
       - ./wildfly/config:/config
-      - ./wildfly/tmp:/opt/bitnami/wildfly/tmp
     depends_on:
       - otus_db
     privileged: true
@@ -58,11 +57,11 @@ services:
     depends_on:
       - otus_backend
     volumes:
-      - ${NGINX_ENABLE_PATH-./nginx/sites-enabled}:/etc/nginx/sites-enabled/
-      - ${NGINX_AVAILABLE_PATH-./nginx/sites-available}:/etc/nginx/sites-available/
-      - ${NGINX_SSL_PATH-./nginx/ssl}:/etc/nginx/ssl/
-      - ${NGINX_HTML-./nginx/html}:/usr/share/nginx/html/
-      - ${NGINX_CONF_PATH-./nginx/nginx.conf}:/etc/nginx/nginx.conf
+      - ${NGINX_ENABLE_PATH-./nginx/persistence/sites-enabled}:/etc/nginx/sites-enabled/
+      - ${NGINX_AVAILABLE_PATH-./nginx/persistence/sites-available}:/etc/nginx/sites-available/
+      - ${NGINX_SSL_PATH-./nginx/persistence/ssl}:/etc/nginx/ssl/
+      - ${NGINX_HTML-./nginx/persistence/html}:/usr/share/nginx/html/
+      - ${NGINX_CONF_PATH-./nginx/persistence/nginx.conf}:/etc/nginx/nginx.conf
     networks:
       - otus-front-network
       - otus-api-network

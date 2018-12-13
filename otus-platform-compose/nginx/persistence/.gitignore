@@ -1,0 +1,5 @@
+**/*.conf
+**/*.template
+**/*.crt
+**/*.key
+*.conf

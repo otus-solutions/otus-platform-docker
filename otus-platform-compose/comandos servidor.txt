@@ -1,0 +1,35 @@
+#APAGAR TODOS OS CONTAINERS
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
+#APAGAR TODAS AS IMAGENS
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
+
+#PARA O SERVIÇO DO DOCKER
+sudo systemctl stop docker
+
+#CRIAR A PASTA PARA RECEBER O DOCKER
+sudo mkdir -p /opt/lib/docker
+
+#COPIAR O DOCKER PARA A NOVA PASTA
+sudo cp -R /var/lib/docker /opt/lib/
+
+#COPIAR AS PERMISSÕES
+sudo chomd --reference=/var/lib/docker /opt/lib/docker
+sudo chown --reference=/var/lib/docker /opt/lib/docker
+
+#REMOVER PASTA ANTIGA DO DOCKER
+sudo rm -rf /var/lib/docker
+
+#CRIAR LINK SIMBÓLICO
+cd /var/lib
+ln -s /opt/lib/docker
+
+#INICIAR O SERVIÇO DO DOCKER
+sudo systemctl start docker
+
+#SUBIR OS CONTAINERS
+cd /opt/otus-platform-docker/otus-platform-compose
+docker-compose up -d
+
+#REDEPLOY
+Deverá ser realizado novo deploy da API (otus e domain)
+

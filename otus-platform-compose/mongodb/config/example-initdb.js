@@ -9,6 +9,7 @@ db.createUser({
   }]
 });
 db.auth("admin", "PASS_ADMIN");
+db.createRole( { role: "executeFunctions", privileges: [ { resource: { anyResource: true }, actions: [ "anyAction" ] } ], roles: [] } );
 
 db = db.getSiblingDB('otus');
 db.createUser({
@@ -19,6 +20,7 @@ db.createUser({
     db: "otus"
   }]
 });
+db.grantRolesToUser("otus", [ { role: "executeFunctions", db: "admin" } ]);
 
 db = db.getSiblingDB('otus-domain');
 db.createUser({

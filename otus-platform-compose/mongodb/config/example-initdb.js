@@ -96,6 +96,10 @@ db.getCollection("user_permission_profile").insert({
         {
             "objectType" : "SurveyGroupPermission",
             "groups" : []
+        },
+        {
+            "access" : false,
+            "objectType" : "LaboratoryPermission"
         }
     ]
 });

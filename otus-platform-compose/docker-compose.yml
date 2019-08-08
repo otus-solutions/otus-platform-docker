@@ -29,6 +29,8 @@ services:
     environment:
       - WILDFLY_USERNAME=${WILDFLY_USER-admin}
       - WILDFLY_PASSWORD=${WILDFLY_PASS-rBQqsMXU}
+      - DBDISTRIBUTION_HOST=${DBDISTRIBUTION_HOST-db-distribution}
+      - DBDISTRIBUTION_PORT=${DBDISTRIBUTION_PORT-7001}
     volumes:
       - ./wildfly/persistence:/bitnami
       - ./wildfly/config:/config

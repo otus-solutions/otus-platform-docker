@@ -1,0 +1,24 @@
+[submodule "otus"]
+	path = otus
+	url = https://github.com/ccem-dev/otus.git
+[submodule "otus-domain"]
+	path = otus-domain
+	url = https://github.com/ccem-dev/otus-domain.git
+[submodule "otus-api"]
+	path = otus-api
+	url = https://github.com/ccem-dev/otus-api.git
+[submodule "otus-studio"]
+	path = otus-studio
+	url = https://github.com/ccem-dev/otus-studio.git
+[submodule "otus-domain-api"]
+	path = otus-domain-api
+	url = https://github.com/ccem-dev/otus-domain-api.git
+[submodule "otus-preview-js"]
+	path = otus-preview-js
+	url = https://github.com/ccem-dev/otus-preview-js.git
+[submodule "otus-model-js"]
+	path = otus-model-js
+	url = https://github.com/ccem-dev/otus-model-js.git
+[submodule "otus-client-js"]
+	path = otus-client-js
+	url = https://github.com/ccem-dev/otus-client-js.git
